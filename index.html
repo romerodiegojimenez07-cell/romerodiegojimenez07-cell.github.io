@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Alejandro Romero Jiménez | Desarrollador Python</title>
+    <meta name="description" content="Portafolio de Diego Alejandro Romero Jiménez, desarrollador backend Python y estudiante de Ingeniería en Ciencias Informáticas en la UCI.">
+    <style>
+        :root {
+            --rojo: #8E1F2F;
+            --rojo-suave: #B03A4A;
+            --rojo-oscuro: #5C1420;
+            --dorado: #D4AF37;
+            --dorado-suave: #E6C96B;
+            --fondo: #12100F;
+            --fondo-2: #1A1614;
+            --texto: #EDE7E3;
+            --texto-suave: #B9AFAA;
+            --borde: rgba(212, 175, 55, 0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: "Segoe UI", system-ui, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.65;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* Navegación */
+        .nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(18, 16, 15, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--borde);
+        }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px; max-width: 1100px; margin: 0 auto; padding: 0 24px;
+        }
+        .nav-marca { font-weight: 700; font-size: 0.95rem; }
+        .nav-marca span { color: var(--dorado); }
+        .nav-links { display: flex; gap: 26px; font-size: 0.9rem; color: var(--texto-suave); }
+        .nav-links a:hover { color: var(--dorado); }
+
+        /* Encabezado (Hero) */
+        .hero {
+            position: relative; overflow: hidden; padding: 90px 0 80px;
+            border-bottom: 1px solid var(--borde);
+        }
+        .hero::before {
+            content: ""; position: absolute; inset: 0;
+            background: 
+                radial-gradient(600px 420px at 18% 8%, rgba(142, 31, 47, 0.60), transparent 70%),
+                radial-gradient(520px 360px at 85% 25%, rgba(176, 58, 74, 0.28), transparent 72%),
+                radial-gradient(420px 300px at 55% 100%, rgba(212, 175, 55, 0.12), transparent 70%);
+            filter: blur(18px); pointer-events: none;
+        }
+        .hero-grid {
+            position: relative; display: grid; grid-template-columns: 1fr 220px;
+            gap: 56px; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 24px;
+        }
+        .etiqueta {
+            display: inline-block; font-size: 0.75rem; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--dorado);
+            border: 1px solid var(--borde); border-radius: 999px;
+            padding: 6px 14px; margin-bottom: 22px;
+        }
+        .hero h1 { font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.15; margin-bottom: 8px; }
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--rojo-suave), var(--dorado));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .hero-sub { font-size: 1.05rem; color: var(--dorado-suave); margin-bottom: 20px; }
+        .hero-bio { color: var(--texto-suave); max-width: 620px; margin-bottom: 28px; }
+        
+        .foto-marco {
+            width: 220px; height: 220px; border-radius: 50%; padding: 6px;
+            background: linear-gradient(135deg, var(--rojo), var(--dorado));
+            box-shadow: 0 0 50px rgba(142, 31, 47, 0.45);
+        }
+        .foto-marco img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; background: var(--fondo-2); }
+
+        /* Secciones */
+        section { padding: 80px 0; }
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .titulo-seccion { font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase; color: var(--dorado); margin-bottom: 12px; }
+        .subtitulo { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 40px; }
+
+        /* Habilidades */
+        .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .skill-card { background: var(--fondo-2); border: 1px solid var(--borde); border-radius: 14px; padding: 32px; }
+        .skill-card h3 { font-size: 1rem; text-transform: uppercase; color: var(--dorado-suave); margin-bottom: 20px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag {
+            font-size: 0.82rem; padding: 7px 14px; border-radius: 999px;
+            background: rgba(142, 31, 47, 0.22); border: 1px solid rgba(142, 31, 47, 0.5);
+        }
+        .tag.blanca { background: rgba(212, 175, 55, 0.08); border-color: var(--borde); color: var(--texto-suave); }
+
+        /* Proyectos */
+        .proyectos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .proyecto {
+            background: var(--fondo-2); border: 1px solid var(--borde); border-radius: 14px;
+            padding: 28px; display: flex; flex-direction: column; transition: 0.2s;
+        }
+        .proyecto:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.5); }
+        .proyecto h3 { font-size: 1.1rem; margin-bottom: 12px; }
+        .proyecto p { font-size: 0.92rem; color: var(--texto-suave); margin-bottom: 20px; flex: 1; }
+        .proyecto .tags { margin-bottom: 22px; }
+        .proyecto .tag { font-size: 0.72rem; padding: 5px 10px; }
+        .proyecto-link { font-size: 0.85rem; color: var(--dorado); font-weight: 600; }
+        .proyecto-link:hover { color: var(--dorado-suave); }
+
+        /* Contacto */
+        .contacto { border-top: 1px solid var(--borde); background: radial-gradient(500px 300px at 50% 0%, rgba(142, 31, 47, 0.25), transparent 70%); text-align: center; }
+        .contacto-centro { max-width: 640px; margin: 0 auto; }
+        .contacto p { color: var(--texto-suave); margin-bottom: 34px; }
+        .contacto-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; }
+        .contacto-link {
+            display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px;
+            border-radius: 999px; border: 1px solid var(--borde); background: var(--fondo-2);
+            font-weight: 600; transition: 0.2s;
+        }
+        .contacto-link:hover { border-color: var(--dorado); transform: translateY(-2px); }
+        .contacto-link svg { width: 20px; height: 20px; fill: var(--dorado); }
+
+        footer { border-top: 1px solid var(--borde); padding: 28px 0; text-align: center; font-size: 0.82rem; color: var(--texto-suave); }
+
+        @media (max-width: 860px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .foto-marco { margin: 0 auto; }
+            .skills, .proyectos-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-marca">Diego Romero <span>| Desarrollador Python</span></div>
+            <div class="nav-links">
+                <a href="#habilidades">Habilidades</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-grid">
+            <div>
+                <span class="etiqueta">Backend Python</span>
+                <h1>Diego Alejandro<br><span>Romero Jiménez</span></h1>
+                <p class="hero-sub">
+                    Desarrollador Python Junior Avanzado &middot; Estudiante de Ingeniería en Ciencias Informáticas en la UCI
+                </p>
+                <p class="hero-bio">
+                    Desarrollador Python con conocimientos en PyQt6, Pygame, Pandas y Django para crear juegos y sistemas profesionales con agentes de IA. Manejo de bases de datos SQLite. Abierto a ofertas.
+                </p>
+            </div>
+            <div class="foto-marco">
+                <img src="foto.jpg" alt="Foto de Diego Alejandro">
+            </div>
+        </div>
+    </header>
+
+    <section id="habilidades">
+        <div class="contenedor">
+            <p class="titulo-seccion">Habilidades</p>
+            <h2 class="subtitulo">Tecnologías y competencias</h2>
+            <div class="skills">
+                <div class="skill-card">
+                    <h3>Técnicas</h3>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">POO</span>
+                        <span class="tag">PyQt6</span>
+                        <span class="tag">Pygame</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Agentes IA (Gemini)</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Blandas</h3>
+                    <div class="tags">
+                        <span class="tag blanca">Trabajo bajo presión</span>
+                        <span class="tag blanca">Trabajo en equipo</span>
+                        <span class="tag blanca">Puntualidad</span>
+                        <span class="tag blanca">Efectividad</span>
+                        <span class="tag blanca">Resolución de problemas</span>
+                        <span class="tag blanca">Aprendizaje continuo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos">
+        <div class="contenedor">
+            <p class="titulo-seccion">Portafolio</p>
+            <h2 class="subtitulo">Proyectos destacados</h2>
+            <div class="proyectos-grid">
+                
+                <!-- PROYECTO 1: SERPI -->
+                <article class="proyecto">
+                    <h3>Serpi (Juego Snake)</h3>
+                    <p>
+                        Juego clásico Snake desarrollado en Python con Pygame. Incluye máquina de estados, menú inicial, niveles, guardado automático de partida y persistencia de récords en JSON.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pygame</span>
+                        <span class="tag">POO</span>
+                    </div>
+                    <!-- [REEMPLAZAR] Pon aquí el link de tu repositorio Serpi -->
+                    <a class="proyecto-link" href="https://github.com/romerodiegojimenez07-cell/Serpi-Juego" target="_blank">Ver repositorio</a>
+                </article>
+
+                <!-- PROYECTO 2: API (En pausa pero en portafolio) -->
+                <article class="proyecto">
+                    <h3>API de Ventas (En desarrollo)</h3>
+                    <p>
+                        API RESTful construida con FastAPI y SQLite. Permite gestionar productos y registrar ventas. Incluye integración de un agente inteligente usando google-genai.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">SQLite</span>
+                    </div>
+                    <a class="proyecto-link" href="https://github.com/romerodiegojimenez07-cell/api-ventas" target="_blank">Ver repositorio</a>
+                </article>
+
+                <!-- PROYECTO 3: Espacio libre -->
+                <article class="proyecto">
+                    <h3>Próximo Proyecto</h3>
+                    <p>
+                        Espacio reservado para el sistema de gestión de ventas de escritorio con PyQt6 que se conectará con la API de Ventas.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyQt6</span>
+                        <span class="tag">SQLite</span>
+                    </div>
+                    <span class="proyecto-link">En construcción</span>
+                </article>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+        <div class="contenedor contacto-centro">
+            <p class="titulo-seccion">Contacto</p>
+            <h2 class="subtitulo">Hablemos</h2>
+            <p>Estoy abierto a oportunidades como desarrollador Python. Puedes escribirme directamente o revisar mi código en GitHub.</p>
+            <div class="contacto-links">
+                
+                <!-- [REEMPLAZAR] Tu link de GitHub -->
+                <a class="contacto-link" href="https://github.com/romerodiegojimenez07-cell" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+                    GitHub
+                </a>
+
+                <!-- [REEMPLAZAR] Tu link de LinkedIn -->
+                <a class="contacto-link" href="https://www.linkedin.com/in/diego-romero-jim%C3%A9nez-64a357439" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                    LinkedIn
+                </a>
+
+                <!-- [REEMPLAZAR] Tu correo de Gmail -->
+                <a class="contacto-link" href="mailto:romero.diego.jimenez07@gmail.com" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 13.5 1.5 6.75V19.5h21V6.75L12 13.5zm10.5-9H1.5L12 11.25 22.5 4.5z"/></svg>
+                    Gmail
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contenedor">
+            Diego Alejandro Romero Jiménez &middot; Desarrollador Python &middot; 2026
+        </div>
+    </footer>
+
+</body>
+</html>
